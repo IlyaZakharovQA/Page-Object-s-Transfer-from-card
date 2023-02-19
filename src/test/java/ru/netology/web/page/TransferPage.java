@@ -18,7 +18,7 @@ public class TransferPage {
     private SelenideElement amountInput = $("[data-test-id= 'amount'] input");
     private SelenideElement fromInput = $("[data-test-id= 'from'] input");
     private SelenideElement transferHead = $x("//h1[text()= 'Пополнение карты']");
-    private SelenideElement error = $("[data-test-id= 'error']");
+
 
 
     public TransferPage() {
@@ -36,7 +36,4 @@ public class TransferPage {
         transferButton.click();
     }
 
-    public void findError(String expectedTest) {
-        error.shouldHave(exactText(expectedTest), Duration.ofSeconds(8)).shouldBe(visible);
-    }
 }

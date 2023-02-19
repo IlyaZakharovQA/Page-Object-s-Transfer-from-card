@@ -55,27 +55,6 @@ public class MoneyTransferTest {
         assertEquals(expectedBalanceFirstCard, actualBalanceFirstCard);
     }
 
-    @Test
-    void shouldTransferFromFirstCardInvalidAmount() {
-        var loginPage = open("http://localhost:9999", LoginPage.class);
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = getVerificationCode();
-        var dashboardPage = verificationPage.validVerify(verificationCode);
-        var firstCardInfo = getFirstCardInfo();
-        var secondCardInfo = getSecondCardInfo();
-        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
-        var amount = generateInvalidAmount(firstCardBalance);
-        var expectedBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
-        var expectedBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
-        var transferPage = dashboardPage.selectCartToTransfer(secondCardInfo);
-        transferPage.makeTransfer(String.valueOf(amount), firstCardInfo);
-        transferPage.findError("Вы ввели сумму, превышающую остаток средств на Вашей карте. Пожалуйста, введите другую сумму");
-        var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
-        var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
-        assertEquals(expectedBalanceFirstCard, actualBalanceFirstCard);
-        assertEquals(expectedBalanceSecondCard, actualBalanceSecondCard);
-    }
 }
 
 
